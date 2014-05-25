@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="iosystems_promotions.expression_language.class">Symfony\Component\ExpressionLanguage\ExpressionLanguage</parameter>
 
+        <parameter key="iosystems_promotions.voter.authentication_based.class">iOSystems\PromotionsBundle\Voting\AuthenticationBasedVoter</parameter>
         <parameter key="iosystems_promotions.voter.role_based.class">iOSystems\PromotionsBundle\Voting\RoleBasedVoter</parameter>
         <parameter key="iosystems_promotions.voter.time_based.class">iOSystems\PromotionsBundle\Voting\TimeBasedVoter</parameter>
         <parameter key="iosystems_promotions.voter.expression_based.class">iOSystems\PromotionsBundle\Voting\ExpressionBasedVoter</parameter>
@@ -22,6 +23,10 @@
     <services>
         <service id="iosystems_promotions.expression_language" class="%iosystems_promotions.expression_language.class%" public="false" />
 
+        <service id="iosystems_promotions.voter.authentication_based" class="%iosystems_promotions.voter.authentication_based.class%" public="false">
+            <tag name="iosystems_promotions.voter" />
+            <argument type="service" id="security.context" />
+        </service>
         <service id="iosystems_promotions.voter.role_based" class="%iosystems_promotions.voter.role_based.class%" public="false">
             <tag name="iosystems_promotions.voter" />
             <argument type="service" id="security.context" />
