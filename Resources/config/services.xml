@@ -14,7 +14,7 @@
         <parameter key="iosystems_promotions.voting_decisor_maker.default">iOSystems\PromotionsBundle\Voting\DecisionMaker\DefaultDecisionMaker</parameter>
 
         <parameter key="iosystems_promotions.picker.fixed_amount.class">iOSystems\PromotionsBundle\Promotion\Picker\FixedAmountPicker</parameter>
-        <parameter key="iosystems_promotions.picker.percentage.class">iOSystems\PromotionsBundle\Promotion\Picker\percentagePicker</parameter>
+        <parameter key="iosystems_promotions.picker.percentage.class">iOSystems\PromotionsBundle\Promotion\Picker\PercentagePicker</parameter>
 
         <parameter key="iosystems_promotions.manager.default.class">iOSystems\PromotionsBundle\Manager\DefaultManager</parameter>
     </parameters>
