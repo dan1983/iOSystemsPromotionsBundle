@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="iosystems_promotions.expression_language.class">Symfony\Component\ExpressionLanguage\ExpressionLanguage</parameter>
+
+        <parameter key="iosystems_promotions.voter.role_based.class">iOSystems\PromotionsBundle\Voting\RoleBasedVoter</parameter>
+        <parameter key="iosystems_promotions.voter.time_based.class">iOSystems\PromotionsBundle\Voting\TimeBasedVoter</parameter>
+        <parameter key="iosystems_promotions.voter.expression_based.class">iOSystems\PromotionsBundle\Voting\ExpressionBasedVoter</parameter>
+
+        <parameter key="iosystems_promotions.voting_decisor_maker.default">iOSystems\PromotionsBundle\Voting\DecisionMaker\DefaultDecisionMaker</parameter>
+
+        <parameter key="iosystems_promotions.picker.fixed_amount.class">iOSystems\PromotionsBundle\Promotion\Picker\FixedAmountPicker</parameter>
+        <parameter key="iosystems_promotions.picker.percentage.class">iOSystems\PromotionsBundle\Promotion\Picker\percentagePicker</parameter>
+
+        <parameter key="iosystems_promotions.manager.default.class">iOSystems\PromotionsBundle\Manager\DefaultManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="iosystems_promotions.expression_language" class="%iosystems_promotions.expression_language.class%" public="false" />
+
+        <service id="iosystems_promotions.voter.role_based" class="%iosystems_promotions.voter.role_based.class%" public="false">
+            <tag name="iosystems_promotions.voter" />
+            <argument type="service" id="security.context" />
+        </service>
+        <service id="iosystems_promotions.voter.time_based" class="%iosystems_promotions.voter.time_based.class%" public="false">
+            <tag name="iosystems_promotions.voter" />
+        </service>
+        <service id="iosystems_promotions.voter.expression_based" class="%iosystems_promotions.voter.expression_based.class%" public="false">
+            <tag name="iosystems_promotions.voter" />
+            <argument type="service" id="iosystems_promotions.expression_language" />
+        </service>
+
+        <service id="iosystems_promotions.voting_decisor_maker.default" class="%iosystems_promotions.voting_decisor_maker.default%" public="false" />
+        <service id="iosystems_promotions.voting_decisor_maker" alias="iosystems_promotions.voting_decisor_maker.default" />
+
+        <service id="iosystems_promotions.picker.fixed_amount" class="%iosystems_promotions.picker.fixed_amount.class%" public="false">
+            <tag name="iosystems_promotions.picker" alias="fixed_amount" />
+        </service>
+        <service id="iosystems_promotions.picker.percentage" class="%iosystems_promotions.picker.percentage.class%" public="false">
+            <tag name="iosystems_promotions.picker" alias="percentage" />
+        </service>
+
+        <service id="iosystems_promotions.manager.default" class="%iosystems_promotions.manager.default.class%">
+            <call method="setDecisionMaker">
+                <argument type="service" id="iosystems_promotions.voting_decisor_maker" />
+            </call>
+        </service>
+
+        <service id="iosystems_promotions.manager" alias="iosystems_promotions.manager.default" />
+    </services>
+</container>

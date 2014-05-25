@@ -1,0 +1,27 @@
+{
+    "name": "iosystems/promotions-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony 2 bundle for managing sales promotions (time/roles/expression language based).",
+    "keywords": ["promotion", "offer", "discount", "sales"],
+    "homepage": "https://github.com/iosystems",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Polichetti",
+            "email": "sviluppatore@iosystems.it",
+            "homepage": "https://github.com/iosystems"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/dependency-injection": ">=2.3",
+        "symfony/http-kernel": ">=2.3",
+        "symfony/config": ">=2.3",
+        "symfony/security": ">=2.3",
+        "symfony/expression-language": ">=2.3"
+    },
+    "autoload": {
+        "psr-0": { "iOSystems\\PromotionsBundle": "" }
+    },
+    "target-dir": "iOSystems/PromotionsBundle"
+}
