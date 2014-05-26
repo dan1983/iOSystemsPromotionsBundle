@@ -36,11 +36,13 @@ class AuthenticationBasedVoter implements VoterInterface
     public function vote(PromotionInterface $promotion, $promotionable)
     {
         /** @var AuthenticationBasedPromotionInterface $promotion */
-        if (!$promotion->requiresAuthentication() ) {
-            return true;
+        if (null === $promotion->requiresAuthentication()) {
+            return null;
         }
 
-        return $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED');
+        $isAuthenticated = $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        return $this->requiresAuthentication() ? $isAuthenticated : !$isAuthenticated;
     }
 
     /**
