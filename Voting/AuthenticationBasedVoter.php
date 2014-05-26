@@ -42,7 +42,7 @@ class AuthenticationBasedVoter implements VoterInterface
 
         $isAuthenticated = $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        return $this->requiresAuthentication() ? $isAuthenticated : !$isAuthenticated;
+        return $promotion->requiresAuthentication() ? $isAuthenticated : !$isAuthenticated;
     }
 
     /**
